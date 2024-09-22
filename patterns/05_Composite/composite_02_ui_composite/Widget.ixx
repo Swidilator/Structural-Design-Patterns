@@ -9,6 +9,7 @@ namespace composite::ui_composite {
     export class Widget {
     protected:
         bool m_IsVisible{true};
+
     public:
         virtual auto Paint() -> void = 0;
 
@@ -17,6 +18,10 @@ namespace composite::ui_composite {
         virtual auto Add(Widget *pWidget) -> void = 0;
 
         virtual auto Remove(Widget *pWidget) -> void = 0;
+
+        virtual auto GetFrame() -> Widget * {
+            return nullptr;
+        }
 
         virtual ~Widget() = default;
     };
