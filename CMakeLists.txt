@@ -1,30 +1,16 @@
 cmake_minimum_required(VERSION 3.28.1)
 project(Structural_Design_Patters)
 
-if(CMAKE_EXPORT_COMPILE_COMMANDS)
+if (CMAKE_EXPORT_COMPILE_COMMANDS)
     set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES})
-endif()
+endif ()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-
 
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 set(CMAKE_CXX_COMPILER clang++)
-#set(CMAKE_CXX_COMPILER_IMPORT_STD ON)
-
-#set(CMAKE_C_COMPILER "/usr/bin/gcc-14")
-#set(CMAKE_CXX_COMPILER "/usr/bin/g++-14")
-
-
-
-#find_package(SDL2)
-
-# Then, link your executable or library with the corresponding package targets:
-
-
-
 
 
 add_executable(01_Adapter patterns/01_Adapter/main_01_adapter.cpp)
