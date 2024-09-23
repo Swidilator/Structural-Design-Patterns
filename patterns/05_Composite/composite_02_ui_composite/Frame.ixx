@@ -48,9 +48,11 @@ namespace composite::ui_composite {
 
         auto Add(Widget *pWidget) -> void override {
             m_Children.push_back(pWidget);
+            pWidget->SetParent(this);
         }
 
         auto Remove(Widget *pWidget) -> void override {
+            pWidget->SetParent(nullptr);
             m_Children.erase(
                 std::ranges::remove(m_Children, pWidget).begin(),
                 end(m_Children));

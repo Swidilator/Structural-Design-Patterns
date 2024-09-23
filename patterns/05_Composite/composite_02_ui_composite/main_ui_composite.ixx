@@ -14,13 +14,18 @@ import composite.ui_composite.Widget;
 
 namespace composite::ui_composite {
     void Display(Widget *pWidget) {
-        pWidget->Paint();
+        //pWidget->Paint();
 
-        auto pFrame = pWidget->GetFrame();
-        if (pFrame) {
+        if (auto pFrame = pWidget->GetFrame(); pFrame != nullptr) {
             pWidget->Add(new Button{});
         } else {
             std::cout << "Cannot add a child\n";
+        }
+
+        if (auto pFrame = pWidget->GetParent(); pFrame != nullptr) {
+            pFrame->Paint();
+        } else {
+            std::cout << "No parent\n";
         }
     }
 
@@ -29,8 +34,10 @@ namespace composite::ui_composite {
         Frame *mainWindow = new Frame{};
         Button *btnOk = new Button{};
         mainWindow->Add(btnOk);
-        mainWindow->Paint();
+        //mainWindow->Paint();
 
+
+        mainWindow->Remove(btnOk);
         Frame *childWindow = new Frame{};
         Button *btnFind = new Button{};
         childWindow->Add(btnFind);
@@ -43,9 +50,14 @@ namespace composite::ui_composite {
         // mainWindow.SetVisibility(false);
         // mainWindow.Paint();
 
+        std::cout << "Operating on button\n";
         Display(btnOk);
+
+        std::cout << "\n\nOperating on frame\n";
         Display(mainWindow);
 
+        // Delete objects that don't have a parent that would delete it automatically
+        delete btnOk;
         delete mainWindow;
 
         // Would work on windows
