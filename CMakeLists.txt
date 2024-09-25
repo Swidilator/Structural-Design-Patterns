@@ -60,8 +60,10 @@ if (LINUX)
     set(SIMPLE2D_LIBS -lsimple2d -I/usr/include/SDL2 -D_REENTRANT -lSDL2 -lGL -lm -lSDL2_image -lSDL2_mixer -lSDL2_ttf)
     target_link_libraries(06_Bridge ${SIMPLE2D_LIBS})
 endif (LINUX)
+add_subdirectory(patterns/06_Bridge)
 add_subdirectory(patterns/06_Bridge/bridge_01_basic_example)
 add_subdirectory(patterns/06_Bridge/bridge_02_shapes)
+add_subdirectory(patterns/06_Bridge/bridge_03_shapes_bridge)
 
 
 

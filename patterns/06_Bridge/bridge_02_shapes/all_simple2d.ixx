@@ -9,7 +9,7 @@ module;
 export module bridge.shapes.all_simple2d;
 
 import bridge.shapes.Shape;
-import bridge.shapes.Point;
+import bridge.Point;
 
 namespace bridge::shapes
 {
