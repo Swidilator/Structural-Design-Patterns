@@ -12,7 +12,7 @@ if (WIN32)
             Point.ixx
             Shape.ixx
             Circle.ixx
-
+            all_simple2d.ixx
     )
 endif (WIN32)
 

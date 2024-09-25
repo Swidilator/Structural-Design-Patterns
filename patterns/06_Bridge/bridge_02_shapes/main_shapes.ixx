@@ -4,6 +4,9 @@
 
 module;
 
+// Can't import this in multiple modules, breaks compilation
+//#include <simple2d.h>
+
 #include "Window.h"
 
 export module bridge.shapes.main;
@@ -12,6 +15,8 @@ import bridge.shapes.Line;
 import bridge.shapes.Circle;
 import bridge.shapes.Shape;
 
+import bridge.shapes.all_simple2d;
+
 namespace bridge::shapes
 {
     auto RenderShape(Shape* pShape)
@@ -19,7 +24,7 @@ namespace bridge::shapes
         pShape->Draw();
     }
 
-    export auto main_shapes() -> void
+    auto Software() -> void
     {
         Window window{};
         window.Show();
@@ -30,5 +35,10 @@ namespace bridge::shapes
         RenderShape(&c);
 
         window.Run();
+    }
+
+    export auto main_shapes() -> void
+    {
+        OpenGL();
     }
 }
