@@ -9,15 +9,18 @@ module;
 export module bridge.shared_implementation.main;
 
 import bridge.shared_implementation.String;
+import bridge.shared_implementation.SharedString;
 
 
 namespace bridge::shared_implementation
 {
     export auto main_shared_implementation() -> void
     {
-        String s{"C++"};
+        SharedString s{"C++"};
         auto s2{s};
-        std::cout << "String:" << s.GetString() << std::endl;
-        std::cout << "Length:" << s.GetLength() << std::endl;
+        auto s3 = std::move(SharedString{"C++"});
+
+        // std::cout << "String:" << s.GetString() << std::endl;
+        // std::cout << "Length:" << s.GetLength() << std::endl;
     }
 }
