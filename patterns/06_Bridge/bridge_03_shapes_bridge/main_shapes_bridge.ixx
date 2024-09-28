@@ -23,6 +23,19 @@ import birdge.shapes_bridge.OpenGL;
 
 namespace bridge::shapes_bridge
 {
+    class Line_GDI
+        : public Line, private GDI
+    {
+        using Line::Line;
+
+    public:
+        void Draw() override
+        {
+            RenderLine(GetStart(), GetEnd());
+            Show();
+        }
+    };
+
     auto RenderShape(Shape* s, Renderer* r) -> void
     {
         s->SetRenderer(r);
@@ -32,12 +45,15 @@ namespace bridge::shapes_bridge
 
     export auto main_shapes_bridge() -> void
     {
-        Line line{{100, 100}, {100, 300}};
-        Circle circle{{400, 400}, 100};
+        Line_GDI lg{{100, 100}, {100, 300}};
+        lg.Draw();
 
-        GDI gdi{};
-        OpenGL open_gl{};
-
-        RenderShape(&circle, &open_gl);
+        // Line line{{100, 100}, {100, 300}};
+        // Circle circle{{400, 400}, 100};
+        //
+        // GDI gdi{};
+        // OpenGL open_gl{};
+        //
+        // RenderShape(&circle, &open_gl);
     }
 }

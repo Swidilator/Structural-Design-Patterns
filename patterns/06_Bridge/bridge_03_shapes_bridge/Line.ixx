@@ -27,5 +27,15 @@ namespace bridge::shapes_bridge
         {
             m_pRenderer->RenderLine(m_Start, m_End);
         }
+
+        [[nodiscard]] Point GetStart() const
+        {
+            return m_Start;
+        }
+
+        [[nodiscard]] Point GetEnd() const
+        {
+            return m_End;
+        }
     };
 }
