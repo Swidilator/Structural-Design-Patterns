@@ -16,10 +16,16 @@ namespace flyweight::string_interning
 {
     export auto main_string_interning() -> void
     {
-        String s1{"C++"};
-        String s2{"C++"};
+        std::vector<String> strings{};
+        for (int i = 0; i < 100; ++i)
+        {
+            strings.emplace_back("C++");
+        }
+        strings[0] = "Java";
+        strings[1] = "C++";
 
-        std::cout << static_cast<const void*>(s1.GetString()) << ":" << s1 << std::endl;
-        std::cout << static_cast<const void*>(s2.GetString()) << ":" << s2 << std::endl;
+        String s1 = "C++";
+        String::ShowCount();
+        StringInfo::ShowCount();
     }
 }

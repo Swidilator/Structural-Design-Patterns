@@ -21,7 +21,7 @@ namespace flyweight::string_interning
 
     auto StringInfo::ShowCount() -> void
     {
-        std::cout << "Instances:" << count << std::endl;
+        std::cout << "[StringInfo] Instances:" << count << std::endl;
     }
 
     StringInfo::~StringInfo()
@@ -66,41 +66,49 @@ namespace flyweight::string_interning
         m_pCurrent = nullptr;
     }
 
-
-    auto String::Allocate(const char* pstr) -> void
+    auto String::ShowCount() -> void
     {
-        m_Length = strlen(pstr);
-        m_pBuffer = new char[m_Length + 1];
-        strcpy_s(m_pBuffer, m_Length + 1, pstr);
-    }
-
-    String::String()
-    {
-        m_pBuffer = new char[1]{'\0'};
+        std::cout << "[String] Instances:" << count << std::endl;
     }
 
     String::String(const char* pstr)
     {
-        Allocate(pstr);
+        ++count;
+        if (auto pInfo = Find(pstr); pInfo != nullptr)
+        {
+            AddRef(pInfo);
+        }
+        else
+        {
+            CreateNew(pstr);
+        }
     }
 
     String::String(const String& other)
     {
-        Allocate(other.m_pBuffer);
+        ++count;
+        m_pCurrent = other.m_pCurrent;
+        ++m_pCurrent->m_Count;
     }
 
     String::String(String&& other) noexcept
     {
-        m_Length = other.m_Length;
-        m_pBuffer = other.m_pBuffer;
-
-        other.m_Length = 0;
-        other.m_pBuffer = nullptr;
+        ++count;
+        m_pCurrent = other.m_pCurrent;
+        other.m_pCurrent = nullptr;
     }
 
     auto String::operator=(const String& other) -> String&
     {
-        Assign(other);
+        if (this != &other)
+        {
+            Release();
+            m_pCurrent = other.m_pCurrent;
+            if (m_pCurrent)
+            {
+                ++m_pCurrent->m_Count;
+            }
+        }
         return *this;
     }
 
@@ -108,42 +116,65 @@ namespace flyweight::string_interning
     {
         if (this != &other)
         {
-            delete[] m_pBuffer;
-            m_Length = other.m_Length;
-            m_pBuffer = other.m_pBuffer;
-
-            other.m_Length = 0;
-            other.m_pBuffer = nullptr;
+            Release();
+            m_pCurrent = other.m_pCurrent;
+            other.m_pCurrent = nullptr;
         }
         return *this;
     }
 
     auto String::GetLength() const -> size_t
     {
-        return m_Length;
+        if (m_pCurrent == nullptr)
+        {
+            return 0;
+        }
+        return m_pCurrent->m_Length;
     }
 
     auto String::GetString() const -> const char*
     {
-        return m_pBuffer;
+        if (m_pCurrent == nullptr)
+        {
+            return "";
+        }
+        return m_pCurrent->m_pBuffer;
     }
 
     auto String::Assign(const char* pstr) -> void
     {
-        delete[] m_pBuffer;
-        Allocate(pstr);
+        if (strcmp(pstr, m_pCurrent->m_pBuffer) == 0)
+        {
+            return;
+        }
+        if (auto pInfo = Find(pstr); pInfo != nullptr)
+        {
+            Release();
+            AddRef(pInfo);
+        }
+        else
+        {
+            CreateNew(pstr);
+        }
     }
 
     void String::Assign(const String& other)
     {
-        if (this != &other)
+        if (this == &other)
         {
-            Assign(other.m_pBuffer);
+            return;
+        }
+        Release();
+        m_pCurrent = other.m_pCurrent;
+        if (m_pCurrent)
+        {
+            ++m_pCurrent->m_Count;
         }
     }
 
     String::~String()
     {
-        delete[] m_pBuffer;
+        --count;
+        Release();
     }
 }

@@ -16,7 +16,7 @@ namespace flyweight::string_interning
         size_t m_Length{};
         size_t m_Count{};
         inline static int count{};
-        StringInfo(const char* pstr);
+        explicit StringInfo(const char* pstr);
         ~StringInfo();
         static auto ShowCount() -> void;
     };
@@ -26,14 +26,15 @@ namespace flyweight::string_interning
     {
         StringInfo* m_pCurrent{};
         inline static std::unordered_map<std::string_view, StringInfo*> m_Strings{};
-        auto Allocate(const char* pstr) -> void;
         [[nodiscard]] auto Find(const char* p) -> StringInfo*;
         auto AddRef(StringInfo* pOther) -> void;
         auto CreateNew(const char* p) -> void;
         auto Release() -> void;
+        inline static int count{};
 
     public:
-        String();
+        static auto ShowCount() -> void;
+        String() = default;
         String(const char* pstr);
 
         String(const String& other);
@@ -50,7 +51,7 @@ namespace flyweight::string_interning
 
         friend auto operator<<(std::ostream& os, const String& obj) -> std::ostream&
         {
-            return os << obj.m_pBuffer;
+            return os << obj.m_pCurrent->m_pBuffer;
         }
 
         ~String();
