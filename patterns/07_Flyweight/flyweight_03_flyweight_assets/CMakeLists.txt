@@ -2,6 +2,7 @@ target_sources(07_Flyweight PUBLIC
         Model.cpp
         Vegetation.cpp
         VegetationFactory.cpp
+        Car.cpp
 )
 
 target_sources(07_Flyweight PUBLIC
@@ -11,4 +12,5 @@ target_sources(07_Flyweight PUBLIC
         Model.cppm
         Vegetation.cppm
         VegetationFactory.cppm
+        Car.cppm
 )
