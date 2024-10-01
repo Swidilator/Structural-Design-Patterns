@@ -3,12 +3,70 @@
 //
 module;
 #include <cstring>
+#include <iostream>
 
 module flyweight.string_interning.String;
 
 
 namespace flyweight::string_interning
 {
+    StringInfo::StringInfo(const char* pstr)
+    {
+        m_Length = strlen(pstr);
+        m_pBuffer = new char[m_Length + 1];
+        strcpy_s(m_pBuffer, m_Length + 1, pstr);
+        ++m_Count;
+        ++count;
+    }
+
+    auto StringInfo::ShowCount() -> void
+    {
+        std::cout << "Instances:" << count << std::endl;
+    }
+
+    StringInfo::~StringInfo()
+    {
+        delete[] m_pBuffer;
+        --count;
+    }
+
+    auto String::Find(const char* p) -> StringInfo*
+    {
+        if (auto pInfo = m_Strings.find(p); pInfo != end(m_Strings))
+        {
+            return pInfo->second;
+        }
+        return nullptr;
+    }
+
+    auto String::AddRef(StringInfo* pOther) -> void
+    {
+        m_pCurrent = pOther;
+        ++m_pCurrent->m_Count;
+    }
+
+    auto String::CreateNew(const char* p) -> void
+    {
+        m_pCurrent = new StringInfo{p};
+        m_Strings[p] = m_pCurrent;
+    }
+
+    auto String::Release() -> void
+    {
+        if (m_pCurrent == nullptr)
+        {
+            return;
+        }
+        auto pInfo = m_Strings.find(m_pCurrent->m_pBuffer);
+        if (--pInfo->second->m_Count == 0)
+        {
+            delete m_pCurrent;
+            m_Strings.erase(pInfo);
+        }
+        m_pCurrent = nullptr;
+    }
+
+
     auto String::Allocate(const char* pstr) -> void
     {
         m_Length = strlen(pstr);
