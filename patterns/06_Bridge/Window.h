@@ -2,9 +2,9 @@
 #pragma once
 #include <windows.h>
 
-import bridge.shapes.Point;
+import bridge.Point;
 
-namespace bridge::shapes
+namespace bridge
 {
     class Window
     {

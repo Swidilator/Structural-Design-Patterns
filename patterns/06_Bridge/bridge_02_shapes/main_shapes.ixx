@@ -7,7 +7,7 @@ module;
 // Can't import this in multiple modules, breaks compilation
 //#include <simple2d.h>
 
-#include "Window.h"
+#include "../Window.h"
 
 export module bridge.shapes.main;
 

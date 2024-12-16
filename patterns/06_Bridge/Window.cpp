@@ -4,7 +4,7 @@
 
 #include <stdexcept>
 
-namespace bridge::shapes
+namespace bridge
 {
 	LRESULT CALLBACK Window::CallBackHandler(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{

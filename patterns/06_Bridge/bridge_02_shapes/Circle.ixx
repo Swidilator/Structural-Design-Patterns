@@ -2,11 +2,11 @@
 // Created by Kyle on 2024/09/25.
 //
 module;
-#include "Window.h"
+#include "../Window.h"
 
 export module bridge.shapes.Circle;
 
-import bridge.shapes.Point;
+import bridge.Point;
 import bridge.shapes.Shape;
 
 namespace bridge::shapes

@@ -3,9 +3,9 @@
 //
 module;
 
-export module bridge.shapes.Point;
+export module bridge.Point;
 
-namespace bridge::shapes
+namespace bridge
 {
     export struct Point
     {

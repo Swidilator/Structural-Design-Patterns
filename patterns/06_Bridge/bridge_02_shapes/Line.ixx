@@ -3,11 +3,11 @@
 //
 module;
 
-#include "window.h"
+#include "../Window.h"
 
 export module bridge.shapes.Line;
 
-import bridge.shapes.Point;
+import bridge.Point;
 import bridge.shapes.Shape;
 
 namespace bridge::shapes
