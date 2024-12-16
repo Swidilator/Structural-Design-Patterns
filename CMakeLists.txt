@@ -71,3 +71,4 @@ add_subdirectory(patterns/06_Bridge/bridge_05_PIMPL)
 # 07_Flyweight
 add_executable(07_Flyweight patterns/07_Flyweight/main_07_flyweight.cpp)
 add_subdirectory(patterns/07_Flyweight/flyweight_01_basic_example)
+add_subdirectory(patterns/07_Flyweight/flyweight_02_game_assets)
