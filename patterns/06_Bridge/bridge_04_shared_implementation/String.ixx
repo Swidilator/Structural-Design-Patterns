@@ -5,6 +5,7 @@ module;
 #include <iostream>
 #include <cstddef>
 #include <cstring>
+#include <source_location>
 
 export module bridge.shared_implementation.String;
 
@@ -14,7 +15,7 @@ namespace bridge::shared_implementation
 #define DOTRACE
 #define _CRT_SECURE_NO_WARNINGS
 #ifdef DOTRACE
-#define TRACETHIS std::cout << __FUNCSIG__ << std::endl
+#define TRACETHIS std::cout << std::source_location::current().function_name() << std::endl
 #else
 #define TRACETHIS
 #endif
