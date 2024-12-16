@@ -5,8 +5,10 @@ module;
 
 export module bridge.shapes.Point;
 
-namespace bridge::shapes {
-    export struct Point {
+namespace bridge::shapes
+{
+    export struct Point
+    {
         float x{};
         float y{};
     };

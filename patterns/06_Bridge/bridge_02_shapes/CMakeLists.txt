@@ -10,6 +10,8 @@ if (WIN32)
             FILES main_shapes.ixx
             Line.ixx
             Point.ixx
+            Shape.ixx
+            Circle.ixx
 
     )
 endif (WIN32)
