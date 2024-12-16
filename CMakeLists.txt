@@ -64,7 +64,6 @@ add_subdirectory(patterns/06_Bridge)
 add_subdirectory(patterns/06_Bridge/bridge_01_basic_example)
 add_subdirectory(patterns/06_Bridge/bridge_02_shapes)
 add_subdirectory(patterns/06_Bridge/bridge_03_shapes_bridge)
-
-
+add_subdirectory(patterns/06_Bridge/bridge_04_shared_implementation)
 
 
