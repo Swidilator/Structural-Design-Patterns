@@ -3,17 +3,34 @@
 //
 module;
 #include <ostream>
+#include <unordered_map>
+#include <string_view>
 export module flyweight.string_interning.String;
 
 
 namespace flyweight::string_interning
 {
-    export class String
+    export struct StringInfo
     {
         char* m_pBuffer{};
         size_t m_Length{};
+        size_t m_Count{};
+        inline static int count{};
+        StringInfo(const char* pstr);
+        ~StringInfo();
+        static auto ShowCount() -> void;
+    };
 
+
+    export class String
+    {
+        StringInfo* m_pCurrent{};
+        inline static std::unordered_map<std::string_view, StringInfo*> m_Strings{};
         auto Allocate(const char* pstr) -> void;
+        [[nodiscard]] auto Find(const char* p) -> StringInfo*;
+        auto AddRef(StringInfo* pOther) -> void;
+        auto CreateNew(const char* p) -> void;
+        auto Release() -> void;
 
     public:
         String();
