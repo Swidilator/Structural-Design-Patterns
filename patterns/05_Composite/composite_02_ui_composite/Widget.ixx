@@ -7,6 +7,8 @@ export module composite.ui_composite.Widget;
 
 namespace composite::ui_composite {
     export class Widget {
+        Widget *m_pParent{};
+
     protected:
         bool m_IsVisible{true};
 
@@ -21,6 +23,14 @@ namespace composite::ui_composite {
 
         virtual auto GetFrame() -> Widget * {
             return nullptr;
+        }
+
+        virtual auto SetParent(Widget *p) -> void {
+            m_pParent = p;
+        }
+
+        virtual auto GetParent() -> Widget * {
+            return m_pParent;
         }
 
         virtual ~Widget() = default;
