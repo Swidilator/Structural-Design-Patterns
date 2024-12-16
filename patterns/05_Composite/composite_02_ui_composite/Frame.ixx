@@ -38,7 +38,7 @@ namespace composite::ui_composite {
             m_IsVisible = visibility;
             std::cout << "[Frame] Changing Visibility\n";
             for (auto pChild: m_Children) {
-                for(int i = 0; i < depth; ++i) {
+                for (int i = 0; i < depth; ++i) {
                     std::cout << "\t";
                 }
                 pChild->SetVisibility(visibility);
@@ -54,6 +54,16 @@ namespace composite::ui_composite {
             m_Children.erase(
                 std::ranges::remove(m_Children, pWidget).begin(),
                 end(m_Children));
+        }
+
+        auto GetFrame() -> Widget * override {
+            return this;
+        }
+
+        ~Frame() override {
+            for (auto pChild: m_Children) {
+                delete pChild;
+            }
         }
     };
 }

@@ -25,9 +25,11 @@ namespace composite::ui_composite {
         }
 
         auto Add(Widget *pWidget) -> void override {
+            throw std::runtime_error{"Not implemented"};
         }
 
         auto Remove(Widget *pWidget) -> void override {
+            throw std::runtime_error{"Not implemented"};
         }
     };
 }
