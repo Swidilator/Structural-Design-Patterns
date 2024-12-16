@@ -19,4 +19,10 @@ namespace flyweight::flyweight_assets {
         }
         return m_Flyweights[tint];
     }
+
+    auto VegetationFactory::GetCar(const std::vector<int>& m_mesh_data, const char* m_p_texture,
+        const Position3D& m_position) -> std::shared_ptr<Car>
+    {
+        return std::make_shared<Car>(m_mesh_data, m_p_texture, m_position);
+    }
 }
