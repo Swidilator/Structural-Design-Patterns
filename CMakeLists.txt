@@ -48,6 +48,21 @@ add_subdirectory(patterns/05_Composite/composite_02_ui_composite)
 add_executable(06_Bridge patterns/06_Bridge/main_06_bridge.cpp)
 # simple2d libs, installed with simple2d.sh on Linux (https://github.com/simple2d/simple2d)
 # build above with clang using CC=clang when installing
-set(SIMPLE2D_LIBS -lsimple2d -I/usr/include/SDL2 -D_REENTRANT -lSDL2 -lGL -lm -lSDL2_image -lSDL2_mixer -lSDL2_ttf)
-target_link_libraries(06_Bridge ${SIMPLE2D_LIBS})
+if (WIN32)
+    set(SIMPLE2D_INSTALL_DIR "C:/Users/Kyle/AppData/Local/simple2d")
+    target_link_libraries(06_Bridge ${SIMPLE2D_INSTALL_DIR}/simple2d.lib)
+
+    target_include_directories(06_Bridge PUBLIC ${SIMPLE2D_INSTALL_DIR})
+    target_include_directories(06_Bridge PUBLIC ${SIMPLE2D_INSTALL_DIR}/SDL2)
+endif (WIN32)
+
+if (LINUX)
+    set(SIMPLE2D_LIBS -lsimple2d -I/usr/include/SDL2 -D_REENTRANT -lSDL2 -lGL -lm -lSDL2_image -lSDL2_mixer -lSDL2_ttf)
+    target_link_libraries(06_Bridge ${SIMPLE2D_LIBS})
+endif (LINUX)
 add_subdirectory(patterns/06_Bridge/bridge_01_basic_example)
+add_subdirectory(patterns/06_Bridge/bridge_02_shapes)
+
+
+
+
