@@ -1,5 +1,5 @@
 target_sources(06_Bridge PUBLIC
-
+        SharedString.cpp
 )
 
 target_sources(06_Bridge PUBLIC
@@ -8,6 +8,4 @@ target_sources(06_Bridge PUBLIC
         FILES main_shared_implementation.ixx
         String.ixx
         SharedString.ixx
-        SharedString.cpp
-
 )
